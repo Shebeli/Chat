@@ -6,7 +6,7 @@ class ChatUser(AbstractUser):
     first_name = models.CharField(max_length=25, blank=True)
     last_name = models.CharField(max_length=25, blank=True)
     display_name = models.CharField(max_length=30, blank=True)
-    phone_number = models.CharField(blank=True)
+    phone_number = models.CharField(max_length=10, blank=True)
     chat_other_user = models.ManyToManyField('self', blank=True, through='PrivateChat')
     REQUIRED_FIELDS = []
 
