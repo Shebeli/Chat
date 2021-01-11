@@ -1,6 +1,7 @@
 from django.core.checks import messages
 from rest_framework import serializers
 from .models import ChatUser, Group, PrivateChat, PrivateChatMsg, GroupChatMsg
+from django.db.models import Q
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -34,9 +35,26 @@ class GCMSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PCMSerializer(serializers.ModelSerializer):
+    PC = serializers.SerializerMethodField()
+
     class Meta:
         model = PrivateChatMsg
         fields = '__all__'
+
+    #def create(self, validated_data):
+        
+    # def get_PC(self, obj):
+    #     if obj.PC in ('',None):
+            
+    #     pc1 = PrivateChat.objects.get(Q(user1=self.initial_data['sender'])|Q(user2=self.initial_data['receiver']))
+    #     pc2 = PrivateChat.objects.get(Q(user1=self.initial_data['receiver'])|Q(user2=self.initial_data['sender']))
+    #     if pc1.exists():
+    #         return pc1
+    #     elif pc2.exists():
+    #         return pc2
+    #     else:
+    #         new_pc = PrivateChat.objects.create(user1=self.initial_data['sender'], user2=self.initial_data['receiver'])
+    #         return new_pc
 
 class PCSerializer(serializers.ModelSerializer):
     #messages = PCMSerializer(many=True)

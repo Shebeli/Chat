@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db.models.fields import related
 
+
 class ChatUser(AbstractUser):
     first_name = models.CharField(max_length=25, blank=True)
     last_name = models.CharField(max_length=25, blank=True)
@@ -33,7 +34,7 @@ class PrivateChatMsg(models.Model):
     def __str__(self):
         return f'Sender: {self.sender}, Receiver: {self.receiver}, Msg: {self.message[:40]}...'
 
- 
+
 class Group(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='creators')
     name = models.CharField(max_length=50)
