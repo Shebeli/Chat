@@ -36,9 +36,9 @@ class PrivateChatMsg(models.Model):
 
 
 class Group(models.Model):
-    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='creators')
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='group_creators')
     name = models.CharField(max_length=50)
-    member = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='members')
+    member = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='group_members', blank=True)
     member_count = models.PositiveIntegerField(default=1)
 
 
