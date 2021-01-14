@@ -16,3 +16,10 @@ class IsOwner(permissions.BasePermission):
         elif d is not None:
             return obj.user2 == request.user
         return False
+
+class IsMember(permissions.BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        if request.user in obj.Group.members:
+            return True 
+        return False

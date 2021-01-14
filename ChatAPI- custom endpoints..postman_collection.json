@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "75cdb86f-5007-413d-b1df-a85a8a50ae07",
+		"name": "ChatAPI- custom endpoints.",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{baseUrl}}/api/chat/users/1/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/chat/users/1/chng_pass/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"chat",
+						"users",
+						"1",
+						"chng_pass",
+						""
+					]
+				},
+				"description": "permissions: [IsAuthenticatedUserSameAsRequestedUser]\r\n- POST only with password key/value"
+			},
+			"response": [
+				{
+					"name": "Password change example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}//api/chat/users/1/chng_pass/?password=1234",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"",
+								"api",
+								"chat",
+								"users",
+								"1",
+								"chng_pass",
+								""
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "1234"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/users/1/list_gp_id/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "permissions: [IsAdminUser|IsOwner] \r\nGET method only\r\n- Returns the associated Group objects based on given user id in URL."
+			},
+			"response": [
+				{
+					"name": "List Groups by user id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/users/1/list_gp_id/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"users",
+								"1",
+								"list_gp_id",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/users/1/list_pc_id/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "permissions: [IsAdminUser|IsOwner] \r\nGET method only\r\n- Returns the associated PrivateChat objects based on given user id in URL."
+			},
+			"response": [
+				{
+					"name": "{{baseUrl}}/api/chat/users/1/list_pc_id/",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/users/1/list_pc_id/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"users",
+								"1",
+								"list_pc_id",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/private_chat/list_pc_request/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "permissions: [IsAuthenticated] \r\nGET method only\r\n- Returns a list of PC objects related to requsted user."
+			},
+			"response": [
+				{
+					"name": "{{baseUrl}}/api/chat/private_chat/list_pc_request/",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/private_chat/list_pc_request/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"private_chat",
+								"list_pc_request",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/private_chat/1/associated_msgs/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "permissions: [IsAdmin|IsOwner]\r\nGET method only \r\n-Returns PrivateChatMessages which are associated with given PC object id in URL."
+			},
+			"response": [
+				{
+					"name": "{{baseUrl}}/api/chat/private_chat/1/associated_msgs/",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/private_chat/1/associated_msgs/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"private_chat",
+								"1",
+								"associated_msgs",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/group/1/associated_msgs/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "permission: [IsOwner|IsAdminUser|IsMember]\r\n- GET method only\r\n- Returns messages related to Group which is given with id in URL."
+			},
+			"response": [
+				{
+					"name": "{{baseUrl}}/api/chat/group/1/associated_msgs/",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/chat/private_chat/1/associated_msgs/",
+							"path": [
+								"api",
+								"chat",
+								"private_chat",
+								"1",
+								"associated_msgs",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}

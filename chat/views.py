@@ -2,13 +2,14 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.db.models import Q
 from rest_framework import viewsets, generics, mixins, status
+from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.decorators import action, permission_classes
 from rest_framework.serializers import Serializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny
 from .serializers import UserSerializer, GroupSerializer, GCMSerializer, PCMSerializer, PCSerializer, PasswordSerializer
 from .models import ChatUser, Group, PrivateChat, PrivateChatMsg, GroupChatMsg
-from .permissions import IsOwner
+from .permissions import IsOwner, IsMember
 
 
 class UserViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin):
@@ -36,7 +37,7 @@ class UserViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.Retri
         return Response( {'status':'password failed to change'},status=status.HTTP_400_BAD_REQUEST)
 
 
-    @action(detail=True, methods=['GET'])
+    @action(detail=True, methods=['GET'],permission_classes=[IsAdminUser|IsOwner])
     def list_pc_id(self,request, pk=None):
         """Returns the associated PC object based on given user_id"""
         pc = PrivateChat.objects.filter(Q(user1__id=pk)|Q(user2__id=pk))
@@ -46,7 +47,7 @@ class UserViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.Retri
         return Response({'status':'theres no data associated with given ID'}, status=status.HTTP_204_NO_CONTENT)
 
 
-    @action(detail=True, methods=['GET'])
+    @action(detail=True, methods=['GET'],permission_classes=[IsAdminUser|IsOwner])
     def list_gp_id(self,request, pk=None):
         """Returns the associated GP object based on given user_id"""
         gp = self.get_object().group_members.all()
@@ -60,6 +61,13 @@ class PCViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin,mixins.Retrieve
     serializer_class = PCSerializer
     queryset = PrivateChat.objects.all()
 
+    def get_permissions(self):
+        if self.action == 'retrieve':
+            permission_classes = [IsOwner]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
+
     @action(detail=True, methods=['GET'], permission_classes=[IsOwner|IsAdminUser])
     def associated_msgs(self, request, pk=None):
         """Returns the messages which are associated with given PC object by id"""
@@ -67,7 +75,7 @@ class PCViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin,mixins.Retrieve
         serializer = PCMSerializer(pcm, many=True) 
         return Response(status=status.HTTP_200_OK, data=serializer.data)
 
-    @action(detail=False, methods=['GET'])
+    @action(detail=False, methods=['GET'], permission_classes=[IsAuthenticated])
     def list_pc_request(self, request):
         """Returns the associated PC object based on requested user"""
         if request.user.is_anonymous:
@@ -83,24 +91,52 @@ class PCViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin,mixins.Retrieve
 class PCMViewSet(viewsets.ModelViewSet):
     serializer_class = PCMSerializer
     queryset = PrivateChatMsg.objects.all()
-    permission_classes= [IsOwner|IsAdminUser]
+
+    def get_permissions(self):
+        if self.action in ('create','retrieve','destroy', 'update'):
+            permission_classes = [IsAdminUser|IsOwner]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
 
 class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     queryset = Group.objects.all()
-    permission_classes=[IsOwner|IsAdminUser]
+    permission_classes=[IsAdminUser]
 
-    @action(detail=True, methods=['GET'], permission_classes=[IsOwner|IsAdminUser])
+    def get_permissions(self):
+        if self.action == 'create':
+            permission_classes = [IsAuthenticated]
+        elif self.action in ('destroy', 'update'):
+            permission_classes = [IsAdminUser|IsOwner]
+        elif self.action == 'retrieve':
+            permission_classes = [IsMember|IsAdminUser]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
+
+    @action(detail=True, methods=['GET'], permission_classes=[IsOwner|IsAdminUser|IsMember])
     def associated_msgs(self, request, pk=None):
         """Returns the messages which are associated with given GP object by id"""
         gpm = GroupChatMsg.objects.filter(Group=self.get_object())
         serializer = GCMSerializer(gpm, many=True)
         return Response(status=status.HTTP_200_OK, data=serializer.data)
 
-    
+
 class GCMViewSet(viewsets.ModelViewSet):
     serializer_class = GCMSerializer
     queryset = GroupChatMsg.objects.all()
-    permission_classes=[IsOwner|IsAdminUser]
+    permission_classes=[IsAdminUser]
+
+    def get_permissions(self):
+        if self.action == 'create':
+            permission_classes = [IsMember | IsAdminUser]
+        elif self.action in ('destroy', 'update'):
+            permission_classes = [IsOwner & IsMember | IsAdminUser]
+        elif self.action == ('retrieve','list'):
+            permission_classes = [IsMember|IsAdminUser]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
 
     

@@ -1,0 +1,423 @@
+{
+	"info": {
+		"_postman_id": "dabd72e4-3539-4c07-a7f7-99ad2de84d89",
+		"name": "ChatAPI-REST endpoints.",
+		"description": "# Introduction\nThis project has different objects which have different relations with each other or not.\nHeres an overall intro:\n- Users can message each other through privateChatMessage objects. But to do so, it must goes through PrivateChat object which has 2 users, and Many PCM objects attached to it.\n- Theres also a Group objects where the creator can add members.\n- GroupChatMessages can be send by it's group members. \n\n\n# Overview\nThe samples and description of each request should clarify how the APIs work, and most of them are based around having 5 REST methods\nThe ones that have different HTTP methods are descriped in description part. \n\n# Authentication\nJWT authentication(access and refersh token).\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{baseUrl}}/api/chat/users/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/chat/users/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"chat",
+						"users",
+						""
+					]
+				},
+				"description": "permission: AdminOnly | Lists all users."
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"users",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/users/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/chat/users/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"chat",
+						"users",
+						""
+					]
+				},
+				"description": "permission: Anyone | Creates a user. required fields: username - password"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"users",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/users/<int:pk>/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/chat/users/<int:pk>/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"chat",
+						"users",
+						"<int:pk>",
+						""
+					]
+				},
+				"description": "permission: AdminOnly | Retrieves a specfic user"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/users/<int:pk>/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"users",
+								"<int:pk>",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/private_chat/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/chat/private_chat/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"chat",
+						"private_chat",
+						""
+					]
+				},
+				"description": "permission: AdminOnly |You can only use 3 methods on this endpoint: retrieve, list or create.|\r\n(Incase you want to retrieve or list specfic private chat or private chat messages objects limited to requested user, there are other custom endpoints for it.)"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/private_chat/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"private_chat",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/private_message/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}//api/chat/private_message/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"",
+						"api",
+						"chat",
+						"private_message",
+						""
+					]
+				},
+				"description": "permission:IsAdmin or IsOwner('create','retrieve','list', 'destroy').\r\n\r\nREST endpoint(all 5 methods on this): Lists all private chat objects.\r\n\r\nNote that you do not need to create Privatchat objects and assign 2 user to it manually, since PrivateChatMessage handles Privatchat objects creation and assignment automatically."
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}//api/chat/private_message/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"",
+								"api",
+								"chat",
+								"private_message",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/group/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/chat/private_message/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"chat",
+						"private_message",
+						""
+					]
+				},
+				"description": "permission:IsAdmin or IsOwner('retrieve','list', 'destroy') or IsAuthenticated('create').\r\n\r\nREST endpoint(all 5 methods on this): Interact with Group objects using 5 methods on this URL.\r\n\r\nNote that group's creator cannot be in member list."
+			},
+			"response": [
+				{
+					"name": "{{baseUrl}}/api/chat/group/",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/private_message/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"private_message",
+								""
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "58"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"detail\": \"Authentication credentials were not provided.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "{{baseUrl}}/api/chat/group_message/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "permission:[IsAdmin|IsMember]--> 'create', [IsOwner & IsMember | IsAdminUser] --> ('destroy', 'update') , [IsMember|IsAdminUser]--> ('list','retrieve')\r\n\r\nREST endpoint(all 5 methods on this): Interact with GroupChatMessages objects using 5 methods on this URL."
+			},
+			"response": [
+				{
+					"name": "{{baseUrl}}/api/chat/group_message/",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/group_message/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"group_message",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -75,12 +75,14 @@ class PCMSerializer(serializers.ModelSerializer):
 
 
 class PCSerializer(serializers.ModelSerializer):
-    #messages = PCMSerializer(many=True)
+    msg = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = PrivateChat
         fields = ['id', 'user1', 'user2','blocked','date_created','msg']
 
+    #validate user1 and user2 should not be the same.
+    #validate that the pcm object's PC should be not different.
 class PasswordSerializer(serializers.Serializer):
     password = serializers.CharField(max_length=128)
 
